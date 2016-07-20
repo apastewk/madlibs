@@ -1,9 +1,8 @@
-<!doctype html>
-<html>
-<head>
-  <title>Goodbye</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Madlib 1{% endblock %}
+
+{% block content %}
+
     There once was a {{ color }} {{ ", ".join(noun) }} sitting in the Hackbright Lab. When {{ person }} went to pick it up, it burst into flames in a totally {{ adjective }} way.
-</body>
-</html>
+
+{% endblock %}

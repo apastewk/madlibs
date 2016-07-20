@@ -1,4 +1,4 @@
-from random import choice
+from random import choice, sample
 
 from flask import Flask, render_template, request
 
@@ -18,7 +18,16 @@ MADLIB_FILE = ["/madlib.html", "/madlib2.html"]
 def start_here():
     """Homepage."""
 
-    return "Hi! This is the home page."
+    return """
+    <!doctype html>
+    <html>
+        <head>
+        </head>
+        <body>
+            <a href="/hello">Welcome!</a>
+         </body>
+    </html>
+    """
 
 
 @app.route('/hello')
@@ -34,7 +43,7 @@ def greet_person():
 
     player = request.args.get("person")
 
-    compliment = choice(AWESOMENESS)
+    compliment = sample(AWESOMENESS, 3)
 
     return render_template("compliment.html",
                            person=player,
