@@ -11,6 +11,8 @@ AWESOMENESS = [
     'awesome', 'terrific', 'fantastic', 'neato', 'fantabulous', 'wowza', 'oh-so-not-meh',
     'brilliant', 'ducky', 'coolio', 'incredible', 'wonderful', 'smashing', 'lovely']
 
+MADLIB_FILE = ["/madlib.html", "/madlib2.html"]
+
 
 @app.route('/')
 def start_here():
@@ -38,6 +40,34 @@ def greet_person():
                            person=player,
                            compliment=compliment)
 
+@app.route('/game')
+def show_madlib_form():
+    """Play madlibs."""
+
+    game = request.args.get("game")
+
+    if game == "yes":
+        return render_template("game.html")
+    elif game == "no":
+        return render_template("goodbye.html")
+
+
+@app.route('/madlib')
+def show_madlib():
+    """Madlib game."""
+
+    person = request.args.get("person")
+    color = request.args.get("color")
+    noun = request.args.getlist("noun")
+    adjective = request.args.get("adjective")
+
+    madlib_file = choice(MADLIB_FILE)
+
+    return render_template(madlib_file, 
+                            person=person, 
+                            color=color, 
+                            noun=noun, 
+                            adjective=adjective)
 
 if __name__ == '__main__':
     # debug=True gives us error messages in the browser and also "reloads" our web app
